@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>陪伴低口語兒童</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf7f1; --ink:#1f2a44; --ink-soft:#4a5470; --line:#2c3e6b;
+  --green:#e3f3e8; --green-dot:#5cc28a;
+  --purple:#ece7f7; --purple-dot:#a58ad8;
+  --blue:#e2eef9; --blue-dot:#7aa7e0;
+  --yellow:#fbf3d6; --yellow-dot:#f2b63a;
+  --peach:#fbd9c6; --skin:#fde3c8; --card-shadow:0 2px 0 rgba(31,42,68,.04);
+  --orange:#f08a5d; --tri2:#f5d36a;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b1f2a; --ink:#f3efe7; --ink-soft:#c3c8d6; --line:#a9bff0;
+    --green:#22392d; --purple:#2f2a42; --blue:#223246; --yellow:#3a3420; --peach:#4a3024;
+    --skin:#f0cfae;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1b1f2a; --ink:#f3efe7; --ink-soft:#c3c8d6; --line:#a9bff0;
+  --green:#22392d; --purple:#2f2a42; --blue:#223246; --yellow:#3a3420; --peach:#4a3024;
+  --skin:#f0cfae;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  line-height:1.6;
+}
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 48px}
+
+/* header tags */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-bottom:22px}
+.tag{font-weight:700;font-size:clamp(15px,2.6vw,20px);position:relative;padding-bottom:6px}
+.tag::after{content:"";position:absolute;left:-4px;right:-4px;bottom:0;height:8px;border-radius:8px;background:var(--green-dot);opacity:.55}
+.tag.p::after{background:var(--purple-dot);opacity:.35}
+.clinic{margin-left:auto;font-size:15px;color:var(--ink-soft);letter-spacing:.1em}
+
+/* title */
+h1{font-size:clamp(30px,7vw,58px);font-weight:900;line-height:1.2;margin:8px 0 10px;letter-spacing:.02em;position:relative}
+h1 .spark{display:inline-block;vertical-align:top;width:.8em;height:.8em}
+.sub{font-size:clamp(17px,3.2vw,24px);letter-spacing:.12em;color:var(--ink-soft);margin:0 0 30px}
+
+.pill{display:inline-block;background:var(--green);border-radius:999px;padding:8px 26px;
+  font-weight:900;font-size:clamp(19px,3.6vw,28px);margin:6px 0 16px}
+.pill.peach{background:var(--peach)}
+.pill.purple{background:var(--purple)}
+
+/* cards */
+.card{display:flex;align-items:center;gap:18px;border-radius:28px;padding:20px 22px;margin-bottom:14px;box-shadow:var(--card-shadow);
+  opacity:0;transform:translateY(16px);animation:rise .7s ease forwards}
+.card:nth-of-type(2){animation-delay:.1s}.card:nth-of-type(3){animation-delay:.2s}.card:nth-of-type(4){animation-delay:.3s}
+@keyframes rise{to{opacity:1;transform:none}}
+.card.g{background:var(--green)}.card.pu{background:var(--purple)}.card.b{background:var(--blue)}.card.y{background:var(--yellow)}
+.dot{flex:none;width:22px;height:22px;border-radius:50%}
+.g .dot{background:var(--green-dot)}.pu .dot{background:var(--purple-dot)}.b .dot{background:var(--blue-dot)}.y .dot{background:var(--yellow-dot)}
+.txt{flex:1;min-width:0}
+.txt h3{margin:0 0 4px;font-size:clamp(20px,4vw,30px);font-weight:900}
+.txt p{margin:0;font-size:clamp(14px,2.4vw,17px);color:var(--ink-soft)}
+.icon{flex:none;width:clamp(96px,22vw,150px);height:auto}
+.num{display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--ink);color:var(--bg);font-size:.7em;margin-right:8px;vertical-align:.15em}
+
+/* svg strokes */
+svg .st{stroke:var(--line);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+svg .ray{stroke:var(--yellow-dot);stroke-width:5;stroke-linecap:round}
+
+/* ---- animations ---- */
+.blink{transform-box:fill-box;transform-origin:center;animation:blink 3.6s infinite}
+@keyframes blink{0%,44%,52%,100%{transform:scaleY(1)}48%{transform:scaleY(.08)}}
+.look{animation:look 3.6s ease-in-out infinite}
+@keyframes look{0%,30%{transform:translateX(0)}40%,60%{transform:translateX(6px)}70%,100%{transform:translateX(0)}}
+
+.wave{transform-box:fill-box;transform-origin:50% 100%;animation:wave 1.6s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(16deg)}}
+.arc{animation:fade 1.6s ease-in-out infinite}
+.arc.a2{animation-delay:.2s}
+@keyframes fade{0%,100%{opacity:.2}50%{opacity:1}}
+
+.tri-move{animation:slide 2.8s ease-in-out infinite}
+@keyframes slide{0%,15%{transform:translate(0,0)}45%{transform:translate(53px,-22px)}75%,100%{transform:translate(106px,0)}}
+.tri-ghost{animation:ghost 2.8s ease-in-out infinite}
+@keyframes ghost{0%,70%{opacity:.25}80%,100%{opacity:1}}
+.arrow{stroke-dasharray:60;animation:draw 2.8s ease-in-out infinite}
+@keyframes draw{0%{stroke-dashoffset:60}40%,100%{stroke-dashoffset:0}}
+
+.bounce{animation:bounce 1.2s ease-in-out infinite}
+.bounce.d2{animation-delay:.15s}.bounce.d3{animation-delay:.3s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
+
+.beat{transform-box:fill-box;transform-origin:center;animation:beat 1.4s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.15)}30%{transform:scale(1)}45%{transform:scale(1.1)}}
+
+.hand-clock{transform-origin:60px 60px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.ball{animation:hop 1.4s cubic-bezier(.3,0,.4,1) infinite}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.reach{transform-box:fill-box;transform-origin:50% 100%;animation:reach 1.4s ease-in-out infinite}
+@keyframes reach{0%,100%{transform:translateY(6px)}50%{transform:translateY(-4px)}}
+
+.twinkle{transform-box:fill-box;transform-origin:center;animation:twinkle 2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{transform:scale(.8) rotate(0);opacity:.6}50%{transform:scale(1.15) rotate(20deg);opacity:1}}
+.sway{transform-box:fill-box;transform-origin:50% 90%;animation:sway 4s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+
+.stem{stroke-dasharray:80;animation:grow 4s ease-out infinite}
+@keyframes grow{0%{stroke-dashoffset:80}40%,100%{stroke-dashoffset:0}}
+.bloom{transform-box:fill-box;transform-origin:center;animation:bloom 4s ease-out infinite}
+@keyframes bloom{0%,35%{transform:scale(0)}55%{transform:scale(1.15)}65%,100%{transform:scale(1)}}
+
+/* footer */
+.closing{display:flex;align-items:flex-end;gap:16px;margin-top:26px}
+.closing .words{flex:1;min-width:0}
+.closing h2{font-size:clamp(20px,4vw,30px);font-weight:900;margin:12px 0 6px}
+.closing p{margin:0;color:var(--ink-soft);font-size:clamp(14px,2.4vw,18px);letter-spacing:.06em}
+.kid{flex:none;width:clamp(140px,30vw,230px)}
+.src{margin-top:34px;font-size:13px;color:var(--ink-soft);text-align:center}
+.src a{color:inherit}
+
+@media (max-width:560px){
+  .card{padding:16px;gap:12px;border-radius:22px}
+  .dot{width:16px;height:16px}
+  .closing{flex-direction:column;align-items:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.card{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span class="tag">兒童語言發展・早療衛教</span>
+    <span class="tag p">葉亭筠 語言治療師</span>
+    <span class="clinic">安禾安新診所</span>
+  </div>
+
+  <h1>當孩子話少、慢半拍<svg class="spark" viewBox="0 0 40 40"><line class="ray" x1="8" y1="6" x2="14" y2="16"/><line class="ray" x1="22" y1="14" x2="34" y2="10"/><line class="ray" x1="22" y1="26" x2="34" y2="28"/></svg><br>陪伴低口語兒童的溫柔步驟</h1>
+  <p class="sub">父母的陪伴與引導，是孩子開口最重要的力量</p>
+
+  <!-- 1 + 2 -->
+  <div class="pill">先打好溝通的基礎</div>
+
+  <div class="card g">
+    <span class="dot"></span>
+    <div class="txt">
+      <h3>創造溝通的動機</h3>
+      <p>什麼都不用說就能拿到，孩子就沒有開口的理由。把喜歡的玩具放在「看得到、拿不到」的地方，等孩子走過來、拉手、指一指或發出聲音。</p>
+    </div>
+    <svg class="icon" viewBox="0 0 160 110" aria-hidden="true">
+      <line class="st" x1="60" y1="40" x2="150" y2="40"/>
+      <g class="ball">
+        <circle cx="105" cy="22" r="16" fill="#f5d36a" class="st"/>
+        <path class="st" d="M89 22h32M105 6c-6 6-6 26 0 32"/>
+      </g>
+      <g class="reach">
+        <path d="M28 108 L28 70 Q28 60 36 60 Q44 60 44 70 L44 108" fill="var(--skin)" class="st"/>
+        <path class="st" d="M33 60 L33 48 M39 60 L39 46"/>
+      </g>
+      <line class="ray" x1="135" y1="6" x2="142" y2="0" style="opacity:.8"/>
+      <line class="ray" x1="142" y1="18" x2="152" y2="16" style="opacity:.8"/>
+    </svg>
+  </div>
+
+  <div class="card pu">
+    <span class="dot"></span>
+    <div class="txt">
+      <h3>建立多管道溝通</h3>
+      <p>點頭、手勢、眼神、圖卡、聲音都算溝通！先接納、讀懂孩子的非口語表達，再把正確的詞說給他聽。</p>
+    </div>
+    <svg class="icon" viewBox="0 0 170 110" aria-hidden="true">
+      <!-- eye -->
+      <g transform="translate(4,22)">
+        <g class="blink">
+          <path class="st" d="M4 32 Q38 2 72 32 Q38 62 4 32Z" fill="#fff"/>
+          <g class="look"><circle cx="38" cy="32" r="12" fill="#1f2a44"/><circle cx="42" cy="27" r="3.5" fill="#fff"/></g>
+        </g>
+      </g>
+      <!-- hand -->
+      <g transform="translate(92,10)">
+        <g class="wave">
+          <g fill="var(--skin)" class="st">
+            <rect x="8" y="22" width="11" height="34" rx="5.5" transform="rotate(-18 13 50)"/>
+            <rect x="20" y="10" width="11" height="42" rx="5.5" transform="rotate(-6 25 50)"/>
+            <rect x="32" y="8" width="11" height="44" rx="5.5" transform="rotate(4 37 50)"/>
+            <rect x="43" y="16" width="11" height="38" rx="5.5" transform="rotate(14 48 50)"/>
+            <rect x="-2" y="52" width="13" height="28" rx="6.5" transform="rotate(-50 5 66)"/>
+            <path d="M8 50 Q6 88 30 92 Q54 92 56 50Z"/>
+          </g>
+        </g>
+        <path class="st arc" d="M64 16 Q72 26 66 38" style="stroke-width:3.5"/>
+        <path class="st arc a2" d="M72 8 Q84 26 74 46" style="stroke-width:3.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 3 -->
+  <div class="pill purple">優化大人的說話方式</div>
+
+  <div class="card b">
+    <span class="dot"></span>
+    <div class="txt">
+      <h3><span class="num">1</span>降低說話壓力，建立安全感</h3>
+      <p>不強迫、不考試，少問「這是什麼？」。在遊戲和日常裡自然地聊，孩子才敢開口。</p>
+    </div>
+    <svg class="icon" viewBox="0 0 160 110" aria-hidden="true">
+      <g class="beat">
+        <path d="M80 92 C30 60 30 22 58 22 C70 22 78 32 80 38 C82 32 90 22 102 22 C130 22 130 60 80 92Z" fill="#f4a3a3" class="st"/>
+        <path d="M60 38 Q58 46 64 50" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="twinkle"><path d="M136 18 l4 8 8 2 -6 6 2 8 -8 -4 -8 4 2 -8 -6 -6 8 -2Z" fill="#f2b63a"/></g>
+    </svg>
+  </div>
+
+  <div class="card y">
+    <span class="dot"></span>
+    <div class="txt">
+      <h3><span class="num">2</span>給予充足的等待時間</h3>
+      <p>問完問題，至少安靜等 <b>5～10 秒</b>。不催促，也別急著替孩子回答。</p>
+    </div>
+    <svg class="icon" viewBox="0 0 160 120" aria-hidden="true">
+      <circle cx="60" cy="60" r="44" fill="#fff" class="st"/>
+      <g stroke="var(--line)" stroke-width="3" stroke-linecap="round">
+        <line x1="60" y1="20" x2="60" y2="26"/><line x1="100" y1="60" x2="94" y2="60"/>
+        <line x1="60" y1="100" x2="60" y2="94"/><line x1="20" y1="60" x2="26" y2="60"/>
+      </g>
+      <line x1="60" y1="60" x2="60" y2="38" stroke="var(--line)" stroke-width="5" stroke-linecap="round"/>
+      <line class="hand-clock" x1="60" y1="60" x2="84" y2="60" stroke="#f08a5d" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="60" cy="60" r="4" fill="var(--line)"/>
+      <circle class="bounce" cx="120" cy="60" r="5.5" fill="var(--line)"/>
+      <circle class="bounce d2" cx="136" cy="60" r="5.5" fill="var(--line)"/>
+      <circle class="bounce d3" cx="152" cy="60" r="5.5" fill="var(--line)"/>
+    </svg>
+  </div>
+
+  <div class="card pu">
+    <span class="dot"></span>
+    <div class="txt">
+      <h3><span class="num">3</span>多用具體讚美與示範</h3>
+      <p>孩子試著發音或指東西時，熱情回應；再用簡短、放慢的句子示範，例如：「對，車車！」</p>
+    </div>
+    <svg class="icon" viewBox="0 0 170 110" aria-hidden="true">
+      <!-- target (ghost) triangle -->
+      <path class="st tri-ghost" d="M128 88 L150 50 L172 88Z" transform="translate(-14,0)" fill="#f5d36a"/>
+      <path class="st arrow" d="M52 52 Q80 26 110 48" style="stroke-width:3.5"/>
+      <path class="st" d="M102 40 L111 49 L99 53" style="stroke-width:3.5"/>
+      <!-- moving triangle -->
+      <g class="tri-move">
+        <path class="st" d="M8 88 L30 50 L52 88Z" fill="#f08a5d"/>
+      </g>
+      <line class="ray" x1="150" y1="34" x2="154" y2="22"/>
+      <line class="ray" x1="160" y1="40" x2="168" y2="32"/>
+    </svg>
+  </div>
+
+  <!-- closing -->
+  <div class="closing">
+    <div class="words">
+      <div class="pill peach">每顆種子，都有自己的花期</div>
+      <h2>耐心陪伴，等待孩子慢慢綻放</h2>
+      <p>每個孩子步調不同，家長的觀察與陪伴值得被重視</p>
+    </div>
+    <svg class="kid" viewBox="0 0 230 200" aria-hidden="true">
+      <!-- flower -->
+      <g transform="translate(178,92)">
+        <path class="st stem" d="M20 100 Q14 70 20 40" style="stroke:#5cc28a"/>
+        <path d="M20 78 Q4 70 6 58 Q18 62 20 74" fill="#5cc28a"/>
+        <g class="bloom">
+          <circle cx="20" cy="26" r="9" fill="#f4a3a3"/><circle cx="32" cy="36" r="9" fill="#f4a3a3"/>
+          <circle cx="8" cy="36" r="9" fill="#f4a3a3"/><circle cx="14" cy="50" r="9" fill="#f4a3a3"/>
+          <circle cx="26" cy="50" r="9" fill="#f4a3a3"/><circle cx="20" cy="40" r="7" fill="#f2b63a"/>
+        </g>
+      </g>
+      <!-- star -->
+      <g class="twinkle"><path d="M196 14 l5 10 10 2 -8 7 2 10 -9 -5 -9 5 2 -10 -8 -7 10 -2Z" fill="#f2b63a" stroke="#d99a1c" stroke-width="2"/></g>
+      <!-- body -->
+      <path d="M40 200 Q40 150 100 148 Q160 150 160 200Z" fill="#cfeedd" class="st"/>
+      <path d="M58 172 H142 M50 188 H150" stroke="#8fd3ae" stroke-width="6"/>
+      <!-- head -->
+      <g class="sway">
+        <circle cx="100" cy="92" r="52" fill="var(--skin)" class="st"/>
+        <path d="M50 84 Q52 36 100 36 Q150 36 152 84 Q138 64 120 66 Q126 54 112 50 Q108 64 90 62 Q92 52 80 54 Q78 68 50 84Z" fill="#b8763f" stroke="#8a5428" stroke-width="3" stroke-linejoin="round"/>
+        <g class="blink" style="animation-duration:4.2s"><ellipse cx="80" cy="96" rx="6" ry="8" fill="#1f2a44"/></g>
+        <g class="blink" style="animation-duration:4.2s"><ellipse cx="120" cy="96" rx="6" ry="8" fill="#1f2a44"/></g>
+        <circle cx="82" cy="93" r="2" fill="#fff"/><circle cx="122" cy="93" r="2" fill="#fff"/>
+        <ellipse cx="66" cy="112" rx="10" ry="6" fill="#f4a3a3" opacity=".7"/>
+        <ellipse cx="134" cy="112" rx="10" ry="6" fill="#f4a3a3" opacity=".7"/>
+        <ellipse cx="100" cy="120" rx="5" ry="6" fill="#c0504d"/>
+      </g>
+      <!-- hands on cheeks -->
+      <ellipse cx="60" cy="140" rx="16" ry="12" fill="var(--skin)" class="st"/>
+      <ellipse cx="140" cy="140" rx="16" ry="12" fill="var(--skin)" class="st"/>
+      <!-- sparks -->
+      <line class="ray" x1="30" y1="40" x2="40" y2="50"/>
+      <line class="ray" x1="20" y1="64" x2="34" y2="66"/>
+    </svg>
+  </div>
+
+  <p class="src">內容整理自 <a href="https://anhe-anxin.com.tw/education-detail.php?id=52" target="_blank" rel="noopener">安禾安新診所 衛教文章（2026.10.20）</a></p>
+</div>
+</body>
+</html>
