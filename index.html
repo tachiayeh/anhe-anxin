@@ -3,30 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#f5eee3">
 <title>陪伴低口語兒童</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
+/* 單一柔和米杏色調：手機深色模式與電腦皆適用，不刺眼且插圖動畫清楚 */
 :root{
-  --bg:#fbf7f1; --ink:#1f2a44; --ink-soft:#4a5470; --line:#2c3e6b;
-  --green:#e3f3e8; --green-dot:#5cc28a;
-  --purple:#ece7f7; --purple-dot:#a58ad8;
-  --blue:#e2eef9; --blue-dot:#7aa7e0;
-  --yellow:#fbf3d6; --yellow-dot:#f2b63a;
-  --peach:#fbd9c6; --skin:#fde3c8; --card-shadow:0 2px 0 rgba(31,42,68,.04);
+  color-scheme: light;
+  --bg:#f5eee3; --ink:#2a3350; --ink-soft:#56607a; --line:#34466f;
+  --green:#dcefe2; --green-dot:#4fb47f;
+  --purple:#e8e1f5; --purple-dot:#9a7fd2;
+  --blue:#dce9f6; --blue-dot:#6e9bd8;
+  --yellow:#f8edc9; --yellow-dot:#eeac2c;
+  --peach:#f9d6c2; --skin:#fde3c8; --card-shadow:0 3px 10px rgba(52,70,111,.08);
   --orange:#f08a5d; --tri2:#f5d36a;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#1b1f2a; --ink:#f3efe7; --ink-soft:#c3c8d6; --line:#a9bff0;
-    --green:#22392d; --purple:#2f2a42; --blue:#223246; --yellow:#3a3420; --peach:#4a3024;
-    --skin:#f0cfae;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#1b1f2a; --ink:#f3efe7; --ink-soft:#c3c8d6; --line:#a9bff0;
-  --green:#22392d; --purple:#2f2a42; --blue:#223246; --yellow:#3a3420; --peach:#4a3024;
-  --skin:#f0cfae;
 }
 *{box-sizing:border-box}
 body{
@@ -68,7 +60,8 @@ h1 .spark{display:inline-block;vertical-align:top;width:.8em;height:.8em}
 .num{display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--ink);color:var(--bg);font-size:.7em;margin-right:8px;vertical-align:.15em}
 
 /* svg strokes */
-svg .st{stroke:var(--line);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+svg .st{stroke:var(--line);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+svg .st:not([fill]){fill:none}
 svg .ray{stroke:var(--yellow-dot);stroke-width:5;stroke-linecap:round}
 
 /* ---- animations ---- */
